@@ -54,11 +54,11 @@ async function createApp(options) {
   const authMiddleware = createBasicAuthMiddleware(context);
   if (authMiddleware) app.use(authMiddleware);
 
-  app.get('/', (_, res) => res.redirect('/app'));
-  app.use('/version', (_, res) => res.send(version));
-  app.use('/v1/projects', createProjectsRouter(context));
-  app.use('/app', express.static(DIST_FOLDER));
-  app.get('/app/*', (_, res) => res.sendFile(path.join(DIST_FOLDER, 'index.html')));
+  app.get('/abi/lighthouse/', (_, res) => res.redirect('/abi/lighthouse/app'));
+  app.use('/abi/lighthouse/version', (_, res) => res.send(version));
+  app.use('/abi/lighthouse/v1/projects', createProjectsRouter(context));
+  app.use('/abi/lighthouse/app', express.static(DIST_FOLDER));
+  app.get('/abi/lighthouse/app/*', (_, res) => res.sendFile(path.join(DIST_FOLDER, 'index.html')));
   app.use(errorMiddleware);
 
   log('[createApp] launching cron jobs');
